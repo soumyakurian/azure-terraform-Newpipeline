@@ -10,16 +10,24 @@ terraform {
 provider "azurerm" {
   features {}
 }
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "TF_Rg_Blobstore"
+    storage_account_name = "tfstorageacntsk23663456"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
 
+}
 resource "azurerm_resource_group" "TF_Test" {
   name     = "TF_AzureRG"
   location = "West US"
 }
 
-resource "azurerm_container_group" "TFCG_Test"{
+resource "azurerm_container_group" "TFCG_Test" {
   name                = "weatherapi"
   location            = azurerm_resource_group.TF_Test.location
-  resource_group_name         = azurerm_resource_group.TF_Test.name
+  resource_group_name = azurerm_resource_group.TF_Test.name
   ip_address_type     = "public"
   dns_name_label      = "sk23663456weatherapi"
   os_type             = "Windows"
