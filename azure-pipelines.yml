@@ -39,9 +39,10 @@ stages:
       variables :
        - group: TerraformSPVars
       steps:
-        - script: |
+        - bash: |
             set -e         
-            Terraform init  -input=false
+
+            Terraform init  -input=false  
             Terraform apply -input=false -auto-approve
           name: 'RunTerraform'
           displayName: 'RunTerraform'
