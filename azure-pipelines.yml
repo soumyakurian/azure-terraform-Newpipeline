@@ -18,7 +18,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
       inputs:
@@ -41,7 +41,6 @@ stages:
       steps:
         - bash: |
             set -e         
-
             Terraform init  -input=false  
             Terraform apply -input=false -auto-approve
           name: 'RunTerraform'
